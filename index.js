@@ -1,5 +1,6 @@
 import Database from "better-sqlite3";
 import "dotenv/config";
+import { getCount } from "./parser.js";
 
 const db = new Database("data.db");
 db.pragma("journal_mode = WAL");
@@ -61,12 +62,27 @@ export const addShip = (projectID, timestamp) => {
  * 2. I counted how many projects were shipped more than 5 days ago.
  * ~  5 days is roughly how long certifying a project takes, according to my estimations.
  * 3. I divided the count of approved projects (121 at the moment) by the total count of projects shipped >5 days ago.
+ * Result: 121/361
  */
 export const approvalRate = 0.335180055;
 
-export const calculateTime = url => {
+export const calculateTime = async url => {
     if(typeof url !== "number")
         url = url.match(/(?<=projects\/)\d+/)?.[0];
     if(!url) return -1;
-    return 5 * 24 * 3600 * 1000;
+    // TODO: cache
+    const count = await getCount();
+    if(Number.isNaN(count)) return -1;
+    // I could do it in one single query, but multiple is cleaner and not much more resources-hungry
+    const firstTimestamp = db.prepare(`SELECT timestamp FROM ships ORDER BY timestamp LIMIT 1`).get().timestamp;
+    const firstUnratedTimestamp = db.prepare(`SELECT timestamp FROM ships ORDER BY timestamp LIMIT 1 OFFSET round(? * ?)`).get(count, approvalRate).timestamp;
+    const avgTimeToRate = (firstUnratedTimestamp - firstTimestamp) / (count * approvalRate);
+    const roundedProduct = Math.round(count * approvalRate);
+    // https://stackoverflow.com/a/72713051
+    const posInUnranked = db.prepare(`WITH sorted AS (
+        SELECT *, RANK() OVER (ORDER BY timestamp ASC) num
+        FROM ships
+    ) SELECT num - ? AS final_num FROM sorted WHERE project_id = ? AND num > ?`).get(roundedProduct, url, roundedProduct)?.final_num;
+    if(posInUnranked === undefined || posInUnranked === null) return -1;
+    return posInUnranked * avgTimeToRate;
 }

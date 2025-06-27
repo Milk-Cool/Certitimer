@@ -40,3 +40,16 @@ export const scanOne = async id => {
         ct.addShip(id, timestamp);
     }
 };
+
+/**
+ * Gets certified project count.
+ */
+export const getCount = async () => {
+    const f = await fetch(`https://summer.hackclub.com/votes/locked`, {
+        headers: {
+            cookie: cookies
+        }
+    });
+    const { window } = new JSDOM(await f.text());
+    return parseInt(window.document.querySelector(".card-content").textContent.match(/(?<=\()\d+/)?.[0]);
+};

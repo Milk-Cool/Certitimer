@@ -30,10 +30,10 @@ else
 
 const app = express();
 app.use(express.static("public"));
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
     res.send(loadEjs({
         url: req.query.url || "",
-        res: req.query.url ? ct.calculateTime(req.query.url) : null
+        res: req.query.url ? await ct.calculateTime(req.query.url) : null
     }, "index.ejs"));
 });
 
