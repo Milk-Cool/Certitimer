@@ -19,6 +19,7 @@ export const getTimestamp = text => {
     else if(unit.match(/^minutes?$/)) return Date.now() - num * 60 * 1000;
     else if(unit.match(/^hours?$/)) return Date.now() - num * 3600 * 1000;
     else if(unit.match(/^days?$/)) return Date.now() - num * 24 * 3600 * 1000;
+    else if(unit.match(/^months?$/)) return Date.now() - num * 30 * 24 * 3600 * 1000;
     else return -1;
 };
 
