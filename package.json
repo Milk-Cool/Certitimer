@@ -1,0 +1,32 @@
+{
+  "name": "certitimer",
+  "version": "0.1.0",
+  "description": "A web tool that tells you roughly when your Summer of Making project is gonna get certified",
+  "keywords": [
+    "certitimer",
+    "som"
+  ],
+  "homepage": "https://github.com/Milk-Cool/Certitimer#readme",
+  "bugs": {
+    "url": "https://github.com/Milk-Cool/Certitimer/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Milk-Cool/Certitimer.git"
+  },
+  "license": "MIT",
+  "author": "Milk_Cool",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.4"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  }
+}
