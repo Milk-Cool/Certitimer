@@ -2,7 +2,7 @@ import Database from "better-sqlite3";
 import "dotenv/config";
 import { getCount } from "./parser.js";
 
-const db = new Database("data.db");
+export const db = new Database("data.db");
 db.pragma("journal_mode = WAL");
 
 /**

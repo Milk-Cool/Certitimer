@@ -37,4 +37,17 @@ app.get("/", async (req, res) => {
     }, "index.ejs"));
 });
 
+const stop = () => {
+    ct.db.close();
+    process.exit(0);
+};
+
+process.on("SIGHUP", () => stop());
+process.on("SIGUSR2", () => stop());
+process.on("SIGINT", () => stop());
+process.on("SIGTERM", () => stop());
+
+process.on("uncaughtException", e => console.error(e));
+process.on("unhandledRejection", e => console.error(e));
+
 app.listen(8043);
