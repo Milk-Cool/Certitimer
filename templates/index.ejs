@@ -17,10 +17,19 @@
         <p><i>Please note: this is just an estimate!!</i></p>
         <% if(res !== null) { %>
             <div id="res">
-                <h1>I predict that...</h1>
-                <!-- Parseable output: [[<%= res %>]]ms -->
-                <h2>You're gonna get certified in about <%= Math.floor(res / (24 * 3600 * 1000)) %>d <%= Math.floor(res / (3600 * 1000)) % 24 %>h <%= Math.floor(res / (60 * 1000)) % 60 %>m <%= Math.floor(res / (1000)) % 60 %>s!</h2>
-                <p><a href="https://github.com/Milk-Cool/Certitimer" target="_blank">Did I get it right? Star me on GitHub!</a></p>
+                <% if(res === -1) { %>
+                    <p>Oops! There was an error. Make sure that you:</p>
+                    <ul>
+                        <li>Entered a valid project URL;</li>
+                        <li>Have made at least one devlog;</li>
+                        <li>Have your project listed on <a href="https://somps.vercel.app" target="_blank">SOMPS</a>.</li>
+                    </ul>
+                <% } else { %>
+                    <h1>I predict that...</h1>
+                    <!-- Parseable output: [[<%= res %>]]ms -->
+                    <h2>You're gonna get certified in about <%= Math.floor(res / (24 * 3600 * 1000)) %>d <%= Math.floor(res / (3600 * 1000)) % 24 %>h <%= Math.floor(res / (60 * 1000)) % 60 %>m <%= Math.floor(res / (1000)) % 60 %>s!</h2>
+                    <p><a href="https://github.com/Milk-Cool/Certitimer" target="_blank">Did I get it right? Star me on GitHub!</a></p>
+                <% } %>
             </div>
         <% } %>
     </body>
