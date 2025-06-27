@@ -53,3 +53,10 @@ export const addShip = (projectID, timestamp) => {
         db.prepare("UPDATE ships SET timestamp = ? WHERE project_id = ?").run(timestamp, projectID);
     db.prepare("INSERT INTO ships (project_id, timestamp) VALUES (?, ?)").run(projectID, timestamp);
 };
+
+export const calculateTime = url => {
+    if(typeof url !== "number")
+        url = url.match(/(?<=projects\/)\d+/)?.[0];
+    if(!url) return -1;
+    return 5 * 24 * 3600 * 1000;
+}

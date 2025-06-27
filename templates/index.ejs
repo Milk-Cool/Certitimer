@@ -3,9 +3,25 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><%= Date.now() %></title>
+        <title>Certitimer!</title>
+        <link href="/style.css" rel="stylesheet">
     </head>
     <body>
-        
+        <h1>Certitimer!</h1>
+        <h2>Estimate the time left until your SOM project gets ceritified</h2>
+        <h5>(or rejected)</h5>
+        <form>
+            <input name="url" type="url" placeholder="Project URL" value="<%= url %>">
+            <input type="submit">
+        </form>
+        <p><i>Please note: this is just an estimate!!</i></p>
+        <% if(res !== null) { %>
+            <div id="res">
+                <h1>I predict that...</h1>
+                <!-- Parseable output: [[<%= res %>]]ms -->
+                <h2>You're gonna get certified in about <%= Math.floor(res / (24 * 3600 * 1000)) %>d <%= Math.floor(res / (3600 * 1000)) % 24 %>h <%= Math.floor(res / (60 * 1000)) % 60 %>m <%= Math.floor(res / (1000)) % 60 %>s!</h2>
+                <p><a href="https://github.com/Milk-Cool/Certitimer" target="_blank">Did I get it right? Star me on GitHub!</a></p>
+            </div>
+        <% } %>
     </body>
 </html>
