@@ -16,8 +16,11 @@ const oneCycle = async () => {
         }
     }
 }
-if(process.env.INIT_CYCLE)
-    oneCycle();
+if(process.env.INIT_CYCLE) 
+    (async () => {
+        await oneCycle();
+        process.exit(0);
+    })();
 else
     (async () => {
         while(true) await oneCycle();
