@@ -50,7 +50,6 @@ let countCacheTimestamp = -1;
 export const getCount = async () => {
     if(countCache !== -1 && Date.now() - countCacheTimestamp < 15 * 60 * 1000) // 15m cache
         return countCache;
-    console.log("a");
     const f = await fetch(`https://summer.hackclub.com/votes/locked`, {
         headers: {
             cookie: cookies

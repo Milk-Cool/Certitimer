@@ -24,6 +24,9 @@
                         <li>Have made at least one devlog;</li>
                         <li>Have your project listed on <a href="https://somps.vercel.app" target="_blank">SOMPS</a>.</li>
                     </ul>
+                <% } else if(res === -2) { %>
+                    <p>Oops! According to our calculations, it should be already certified or rejected!</p>
+                    <p><i>Expect your certification then! Good luck!!</i></p>
                 <% } else { %>
                     <h1>I predict that...</h1>
                     <!-- Parseable output: [[<%= res %>]]ms -->
