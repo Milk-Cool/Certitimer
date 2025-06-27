@@ -24,12 +24,14 @@
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",
     "@types/express": "^5.0.3",
+    "@types/jsdom": "^21.1.7",
     "@types/node": "^24.0.4"
   },
   "dependencies": {
     "better-sqlite3": "^12.1.1",
     "dotenv": "^16.6.0",
     "ejs": "^3.1.10",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "jsdom": "^26.1.0"
   }
 }
