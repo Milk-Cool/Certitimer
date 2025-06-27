@@ -36,3 +36,6 @@ input[type="submit"] {
     border: 3px solid red;
     box-shadow: 0 7px 7px #f004;
 }
+#res a {
+    color: darkblue;
+}
