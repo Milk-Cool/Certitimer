@@ -21,7 +21,7 @@ if(process.env.DISABLE_CYCLES) {}
 else if(process.env.INIT_CYCLE) 
     (async () => {
         await oneCycle();
-        process.exit(0);
+        stop();
     })();
 else
     (async () => {
