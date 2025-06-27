@@ -54,6 +54,16 @@ export const addShip = (projectID, timestamp) => {
     db.prepare("INSERT INTO ships (project_id, timestamp) VALUES (?, ?)").run(projectID, timestamp);
 };
 
+/**
+ * Approval rate.
+ * Here's exactly how a calculated it:
+ * 1. I scanned all projects and saved those that were shipped.
+ * 2. I counted how many projects were shipped more than 5 days ago.
+ * ~  5 days is roughly how long certifying a project takes, according to my estimations.
+ * 3. I divided the count of approved projects (121 at the moment) by the total count of projects shipped >5 days ago.
+ */
+export const approvalRate = 0.335180055;
+
 export const calculateTime = url => {
     if(typeof url !== "number")
         url = url.match(/(?<=projects\/)\d+/)?.[0];
