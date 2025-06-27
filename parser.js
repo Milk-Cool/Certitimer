@@ -41,15 +41,24 @@ export const scanOne = async id => {
     }
 };
 
+let countCache = -1;
+let countCacheTimestamp = -1;
+
 /**
  * Gets certified project count.
  */
 export const getCount = async () => {
+    if(countCache !== -1 && Date.now() - countCacheTimestamp < 15 * 60 * 1000) // 15m cache
+        return countCache;
+    console.log("a");
     const f = await fetch(`https://summer.hackclub.com/votes/locked`, {
         headers: {
             cookie: cookies
         }
     });
     const { window } = new JSDOM(await f.text());
-    return parseInt(window.document.querySelector(".card-content").textContent.match(/(?<=\()\d+/)?.[0]);
+    const count = parseInt(window.document.querySelector(".card-content").textContent.match(/(?<=\()\d+/)?.[0]);
+    countCache = count;
+    countCacheTimestamp = Date.now();
+    return count;
 };
