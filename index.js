@@ -52,7 +52,8 @@ export const getShipByProjectID = projectID => {
 export const addShip = (projectID, timestamp) => {
     if(getShipByProjectID(projectID))
         db.prepare("UPDATE ships SET timestamp = ? WHERE project_id = ?").run(timestamp, projectID);
-    db.prepare("INSERT INTO ships (project_id, timestamp) VALUES (?, ?)").run(projectID, timestamp);
+    else
+        db.prepare("INSERT INTO ships (project_id, timestamp) VALUES (?, ?)").run(projectID, timestamp);
 };
 
 /**
