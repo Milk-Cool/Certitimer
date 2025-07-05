@@ -30,7 +30,7 @@ export const scanOne = async id => {
         }
     });
     const { window } = new JSDOM(await f1.text());
-    const devlogsAndShips = Array.from(window.document.querySelector("#devlogs").children).reverse();
+    const devlogsAndShips = Array.from(window.document.querySelector("#devlogs").children)/*.reverse()*/; // Already reversed as of 4th of July
     for(const devlogOrShip of devlogsAndShips) {
         const shipText = devlogOrShip.querySelector(".grow-1 > div > p:nth-child(1)");
         if(!shipText || !shipText.textContent || !shipText.textContent.includes("Ship")) continue;
